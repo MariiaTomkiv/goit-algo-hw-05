@@ -4,6 +4,10 @@ def input_error(func):
                 return func(*args, **kwargs)
             except ValueError:
                 return "Give me name and phone please."
+            except KeyError:
+                return "Contact not found"
+            except IndexError:
+                return "Not found"
     return inner
 
 def parse_input(user_input):
