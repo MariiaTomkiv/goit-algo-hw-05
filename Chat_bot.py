@@ -1,16 +1,9 @@
-rom functools import wraps
-
 def input_error(func):
-    @wraps(func)
     def inner(*args, **kwargs):
-        try:
-            return func(*args, **kwargs)
-        except ValueError:
-            return "Give me name and phone please."
-        except KeyError:
-            return "Please enter name user"
-        except IndexError:
-            return "Please enter phone number"
+            try:
+                return func(*args, **kwargs)
+            except ValueError:
+                return "Give me name and phone please."
     return inner
 
 def parse_input(user_input):
@@ -24,7 +17,6 @@ def add_contact(args, contacts):
     contacts[name] = phone
     return "Contact added."
 
-@input_error
 def change(args, contacts):
     name, phone = args
     if name in contacts:
@@ -33,7 +25,6 @@ def change(args, contacts):
     else:
         return "Contact not found"
 
-@input_error
 def phone(args, contacts):
     name = args[0]
     if name in contacts:
